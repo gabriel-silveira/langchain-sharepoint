@@ -3,11 +3,10 @@ import requests
 
 def get_files(token: str):
   headers = {"Authorization": f"Bearer {token}"}
-  site_url = "https://graph.microsoft.com/v1.0/sites/verxti.sharepoint.com:/sites/verxti"
+  site_url = "https://graph.microsoft.com/v1.0/sites/verxti.sharepoint.com:/sites/ProspeccaoVERX2025"
   site = requests.get(site_url, headers=headers).json()
 
   if site:
-    print(site)
     site_id = site["id"]
 
     # Agora pegue os drives (bibliotecas de documentos)
