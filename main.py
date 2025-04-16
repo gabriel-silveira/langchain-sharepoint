@@ -1,15 +1,24 @@
-from src.graph import get_files
-from src.auth import get_confidential_token
-from src.loader import write_file
 from dotenv import load_dotenv
+from src.graph import get_sharepoint_files
+from src.auth import get_confidential_token
+from src.files import write_docs_locally
+from src.docling_loader import load_documents_with_docling
+from src.indexer import index_in_milvus
 
 load_dotenv()
 
 if __name__ == "__main__":
-  token = get_confidential_token()
+    # 1.
+    token = get_confidential_token()
 
-  files = get_files(token)
+    # 2.
+    files = get_sharepoint_files(token)
 
-  for file in files:
-    if file['@microsoft.graph.downloadUrl']:
-      write_file(file['@microsoft.graph.downloadUrl'], file['name'])
+    # 3.
+    document_paths = write_docs_locally(files)
+
+    # 4.
+    docling_docs = load_documents_with_docling(document_paths)
+
+    # 5.
+    index_in_milvus(docling_docs)

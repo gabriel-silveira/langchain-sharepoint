@@ -1,3 +1,7 @@
 msal
 requests
 python-dotenv
+langchain
+docling
+pymilvus
+langchain_docling
