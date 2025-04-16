@@ -3,5 +3,6 @@ requests
 python-dotenv
 langchain
 docling
-pymilvus
+langchain-community
 langchain_docling
+langchain-openai

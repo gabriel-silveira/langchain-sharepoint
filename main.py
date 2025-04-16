@@ -20,5 +20,8 @@ if __name__ == "__main__":
     # 4.
     docling_docs = load_documents_with_docling(document_paths)
 
+    for doc in docling_docs:
+        print(doc)
+
     # 5.
     index_in_milvus(docling_docs)

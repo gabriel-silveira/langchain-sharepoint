@@ -8,9 +8,9 @@ def load_documents_with_docling(paths: List[str]) -> List[Document]:
 
     documents: List[Document] = loader.load()
 
-    print(f"Documents loaded via Docling: {len(documents)}")
-
     for d in documents:
         print(d.metadata["source"], "— size:", len(d.page_content))
+
+    print(f"Documents loaded via Docling: {len(documents)}\n")
 
     return documents
