@@ -6,3 +6,4 @@ docling
 langchain-community
 langchain_docling
 langchain-openai
+pymilvus
