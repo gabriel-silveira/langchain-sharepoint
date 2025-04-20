@@ -1,6 +1,6 @@
 from dotenv import dotenv_values
 from pymilvus import Collection, MilvusException, connections, db, utility
-from langchain_community.vectorstores import Milvus
+from langchain_milvus import Milvus
 from langchain_openai import OpenAIEmbeddings
 from langchain.schema import Document
 
