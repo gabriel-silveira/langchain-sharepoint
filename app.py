@@ -10,17 +10,28 @@ rag_chain = SharePointRAG().get_chain()
 def chat():
     data = request.get_json()
 
-    question = data.get("question")
+    # Validação de campos obrigatórios
+    if not data:
+        return jsonify({"error": "Requisição inválida. Corpo JSON ausente."}), 400
 
-    if not question:
-        return jsonify({"error": "Pergunta não fornecida"}), 400
+    question = data.get("question")
+    session_id = data.get("session_id", "default_user")
+
+    if not isinstance(question, str) or not question.strip():
+        return jsonify({"error": "O campo 'question' é obrigatório."}), 400
+
+    if not isinstance(session_id, str) or not session_id.strip():
+        return jsonify({"error": "O campo 'session_id' é obrigatório."}), 400
 
     try:
-        response = rag_chain.invoke({"question": question})
+        response = rag_chain.invoke(
+            {"question": question},
+            config={"configurable": {"session_id": session_id}}
+        )
 
         return jsonify({"answer": response["answer"]})
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": f"Erro ao processar a pergunta: {str(e)}"}), 500
 
 
 @app.route("/", methods=["GET"])
