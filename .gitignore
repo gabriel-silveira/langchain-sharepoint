@@ -3,5 +3,6 @@
 .idea
 .venv
 
+crawled/
 files/
 volumes/
