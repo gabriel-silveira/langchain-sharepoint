@@ -10,16 +10,17 @@ def crawl_url(url: str):
     # Crawl a website:
     crawled_results = app.crawl_url(
         url,
-        limit=3,
+        limit=1,
         scrape_options=ScrapeOptions(formats=['markdown']),
         poll_interval=30
     )
 
     if crawled_results.status == "completed":
         for doc in crawled_results.data:
-            if "markdown" in doc:
-                with open('files/crawling_results.txt', "wb") as f:
-                    f.write(doc.markdown)
+            print(doc.markdown)
+
+            with open(f'crawled/{doc.metadata['scrapeId']}.txt', "wb") as f:
+                f.write(doc.markdown.encode())
 
     # for i, crawled in enumerate(crawled_results):
     #    print(f'Section {i}')
