@@ -9,3 +9,5 @@ langchain-openai
 langchain-milvus
 pymilvus
 flask
+firecrawl-py
+langchain-core
