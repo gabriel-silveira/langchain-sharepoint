@@ -1,0 +1,21 @@
+{
+  "name": "verx-knowledge-api",
+  "version": "1.0.0",
+  "description": "Verx Knowledge API",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gunicorn --bind 127.0.0.1:5000 --log-level debug --timeout 600 --graceful-timeout 600 crawl:app",
+    "install": "pip install --no-cache-dir -r requirements.txt",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabriel-silveira/langchain-sharepoint.git"
+  },
+  "author": "Gabriel Silveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabriel-silveira/langchain-sharepoint/issues"
+  },
+  "homepage": "https://github.com/gabriel-silveira/langchain-sharepoint#readme"
+}
