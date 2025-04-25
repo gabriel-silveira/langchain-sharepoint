@@ -11,3 +11,4 @@ pymilvus
 flask
 firecrawl-py
 langchain-core
+gunicorn
