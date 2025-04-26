@@ -6,9 +6,10 @@ docling
 langchain-community
 langchain_docling
 langchain-openai
-langchain-milvus
+langchain-milvus==0.1.10
 pymilvus
 flask
+flask-cors
 firecrawl-py
 langchain-core
 gunicorn

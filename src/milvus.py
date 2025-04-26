@@ -48,16 +48,16 @@ def similarity_search(query: str):
     return results
 
 
-def create_database():
+def create_collection(my_collection_name: str):
     # Check if the database exists
     try:
         existing_databases = db.list_database()
 
-        if milvus_collection in existing_databases:
-            print(f"Database '{milvus_collection}' already exists.")
+        if my_collection_name in existing_databases:
+            print(f"Database '{my_collection_name}' already exists.")
 
             # Use the database context
-            db.using_database(milvus_collection)
+            db.using_database(my_collection_name)
 
             # Drop all collections in the database
             collections = utility.list_collections()
@@ -67,14 +67,14 @@ def create_database():
                 collection.drop()
                 print(f"Collection '{collection_name}' has been dropped.")
 
-            db.drop_database(milvus_collection)
+            db.drop_database(my_collection_name)
 
-            print(f"Database '{milvus_collection}' has been deleted.")
+            print(f"Database '{my_collection_name}' has been deleted.")
         else:
-            print(f"Database '{milvus_collection}' does not exist.")
+            print(f"Database '{my_collection_name}' does not exist.")
 
-            database = db.create_database(milvus_collection)
+            database = db.create_database(my_collection_name)
 
-            print(f"Database '{milvus_collection}' created successfully.")
+            print(f"Database '{my_collection_name}' created successfully.")
     except MilvusException as e:
         print(f"An error occurred: {e}")

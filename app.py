@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from src.sharepoint_rag_chain import SharePointRAG
 
 app = Flask(__name__)
+CORS(app)
 
 rag_chain = SharePointRAG().get_chain()
 

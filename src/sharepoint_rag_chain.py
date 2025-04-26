@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_milvus import Milvus
 from langchain.chains import ConversationalRetrievalChain
-from src.database import milvus_host, milvus_port, milvus_collection
+from src.milvus import milvus_host, milvus_port, milvus_collection
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_core.chat_history import InMemoryChatMessageHistory
 

@@ -4,8 +4,10 @@
   "description": "Verx Knowledge API",
   "main": "index.js",
   "scripts": {
-    "dev": "gunicorn --bind 127.0.0.1:5000 --log-level debug --timeout 600 --graceful-timeout 600 crawl:app",
+    "dev": "gunicorn --bind 127.0.0.1:5000 --log-level debug --timeout 600 --graceful-timeout 600 app:app",
+    "crawl": "gunicorn --bind 127.0.0.1:5000 --log-level debug --timeout 600 --graceful-timeout 600 crawl:app",
     "install": "pip install --no-cache-dir -r requirements.txt",
+    "milvus:start": "sudo docker start ccddef6fdb28",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

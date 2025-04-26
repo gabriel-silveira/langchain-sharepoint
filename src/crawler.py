@@ -1,7 +1,10 @@
 from firecrawl import FirecrawlApp, ScrapeOptions
+from langchain_openai import OpenAIEmbeddings
 from dotenv import dotenv_values
 
 config = dotenv_values(".env")
+
+embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
 
 
 class WebCrawler:
@@ -46,6 +49,24 @@ class WebCrawler:
                         'markdown': doc.markdown,
                     }
 
+                # TODO
+                ## Check the course "LangChain Chat with Your Data" - Lesson 3: Document Splitting
+
+                # Context aware splitting
+
+                # Chunking aims to keep text with common context together.
+                # A text splitting often uses sentences or other delimiters
+                # to keep related text together but many documents
+                # (such as Markdown) have structure (headers) that can be
+                # explicitly used in splitting.
+
+                # We can use `MarkdownHeaderTextSplitter` to preserve
+                # header metadata in our chunks, as show below.
+
+                # TODO
+                ## Insert markdowns (chunks) into Milvus
+                ## See: insert_markdown_data(collection, markdown_fragments)
+
         print('Markdown files written')
 
         print('Returning results')
@@ -55,3 +76,25 @@ class WebCrawler:
         # for i, crawled in enumerate(crawled_results):
         #    print(f'Section {i}')
         #    print(crawled)
+
+
+# Função para gerar embeddings
+def generate_embeddings(markdown_fragments):
+    return embedding_model.embed_documents(markdown_fragments)
+
+
+def insert_markdown_data(collection, markdown_fragments):
+    # Gerar embeddings
+    embeddings = generate_embeddings(markdown_fragments)
+
+    # Preparar dados para inserção
+    entities = [
+        {"content": markdown_fragments},
+        {"embedding": embeddings}
+    ]
+
+    # Inserir no Milvus
+    collection.insert(entities)
+    collection.flush()  # Garantir que os dados são persistidos
+
+    print(f"Inseridos {len(markdown_fragments)} fragmentos no Milvus")
